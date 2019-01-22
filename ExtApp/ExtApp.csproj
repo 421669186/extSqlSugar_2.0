@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FDE6299-47A8-4057-A95D-6DC59BE58219}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ExtApp</RootNamespace>
+    <AssemblyName>ExtApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HJ.Persistence">
+      <HintPath>E:\svn\资源库\开发部\CDSVN\02.研发项目\07.深圳南山医院\02.源代码\DLL\HJ.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\DLL\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\DLL\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntacticSugar">
+      <HintPath>..\DLL\SyntacticSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\DLL\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessLogic\DataTable.cs" />
+    <Compile Include="BusinessLogic\ExtLogic.cs" />
+    <Compile Include="BusinessLogic\FuncComm.cs" />
+    <Compile Include="BusinessLogic\TestClass.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DataBase.cs" />
+    <Compile Include="EtlSysPub.cs" />
+    <Compile Include="IImplement.cs" />
+    <Compile Include="MainAPP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainAPP.Designer.cs">
+      <DependentUpon>MainAPP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CDR\DP_ANESTHESIA_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_ASSESSMENT_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_CHECK_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_CLAIM.cs" />
+    <Compile Include="Models\CDR\DP_CLAIM_DET.cs" />
+    <Compile Include="Models\CDR\DP_CONSULT_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_DIAGNOSIS.cs" />
+    <Compile Include="Models\CDR\DP_DICT_CHECKTEST.cs" />
+    <Compile Include="Models\CDR\DP_DICT_CODE_TRANS.cs" />
+    <Compile Include="Models\CDR\DP_DICT_DEPT.cs" />
+    <Compile Include="Models\CDR\DP_DICT_DETAIL.cs" />
+    <Compile Include="Models\CDR\DP_DICT_DIAG.cs" />
+    <Compile Include="Models\CDR\DP_DICT_DRUG.cs" />
+    <Compile Include="Models\CDR\DP_DICT_EMPLOYEE.cs" />
+    <Compile Include="Models\CDR\DP_DICT_EMPLOYEE_DEPT.cs" />
+    <Compile Include="Models\CDR\DP_DICT_MASTER.cs" />
+    <Compile Include="Models\CDR\DP_EMR_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_INFECTION_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_IN_ORDERS.cs" />
+    <Compile Include="Models\CDR\DP_IN_PATIENT.cs" />
+    <Compile Include="Models\CDR\DP_MEDICAL_HP_SURG.cs" />
+    <Compile Include="Models\CDR\DP_MEDICAL_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_NURSE_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_OPERATION_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_OUT_EMR.cs" />
+    <Compile Include="Models\CDR\DP_OUT_PATIENT.cs" />
+    <Compile Include="Models\CDR\DP_OUT_RECIPE.cs" />
+    <Compile Include="Models\CDR\DP_PATHOLOGY_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_TEST_RECORD.cs" />
+    <Compile Include="Models\CDR\DP_TEST_RESULT.cs" />
+    <Compile Include="Models\CDR\DP_TEST_RESULT_GERM.cs" />
+    <Compile Include="Models\CDR\DP_TRANS_RECORD.cs" />
+    <Compile Include="Models\CDR\ETL_CDR_JOB.cs" />
+    <Compile Include="Models\CDR\KETTLE_CDR_LOG_JOB.cs" />
+    <Compile Include="Models\CDR\KETTLE_CDR_LOG_JOB_STEP.cs" />
+    <Compile Include="Models\CDR\sysdiagrams.cs" />
+    <Compile Include="Models\UT\COMM_DETAIL_DICT.cs" />
+    <Compile Include="Models\UT\COMM_MASTER_DICT.cs" />
+    <Compile Include="Models\UT\COMM_SDR_VS_CDR.cs" />
+    <Compile Include="Models\UT\CPAT_EMR.cs" />
+    <Compile Include="Models\UT\CPAT_EXAM_MASTER.cs" />
+    <Compile Include="Models\UT\CPAT_LAB_MASTER.cs" />
+    <Compile Include="Models\UT\CPAT_LAB_RESULT.cs" />
+    <Compile Include="Models\UT\CPAT_ORDERS.cs" />
+    <Compile Include="Models\UT\CPAT_PIS_MASTER.cs" />
+    <Compile Include="Models\UT\DATA_EXTRACTION_LOG.cs" />
+    <Compile Include="Models\UT\DEPT_DICT.cs" />
+    <Compile Include="Models\UT\EXECPROC_ERRORLOG.cs" />
+    <Compile Include="Models\UT\EXPORT_DATA_APPLY.cs" />
+    <Compile Include="Models\UT\EXPORT_DATA_LOG.cs" />
+    <Compile Include="Models\UT\MENU_DICT.cs" />
+    <Compile Include="Models\UT\MENU_VS_ROLE.cs" />
+    <Compile Include="Models\UT\PAGE_DICT.cs" />
+    <Compile Include="Models\UT\PAGE_VS_ROLE.cs" />
+    <Compile Include="Models\UT\PAT_DEL_LOG.cs" />
+    <Compile Include="Models\UT\PAT_DIAGNOSIS.cs" />
+    <Compile Include="Models\UT\PAT_SA_ITEM_RESULT.cs" />
+    <Compile Include="Models\UT\PAT_SA_QUEUE.cs" />
+    <Compile Include="Models\UT\PAT_SC_ITEM_RESULT.cs" />
+    <Compile Include="Models\UT\PAT_SC_QUEUE.cs" />
+    <Compile Include="Models\UT\PAT_SD_ITEM_RESULT.cs" />
+    <Compile Include="Models\UT\PAT_SD_QUEUE.cs" />
+    <Compile Include="Models\UT\PAT_SF_PLAN.cs" />
+    <Compile Include="Models\UT\PAT_SF_QUEUE.cs" />
+    <Compile Include="Models\UT\PAT_SF_TASK_ITEM_VALUE.cs" />
+    <Compile Include="Models\UT\PAT_VISIT.cs" />
+    <Compile Include="Models\UT\P_DRUG_DICT.cs" />
+    <Compile Include="Models\UT\P_DRUG_ITEM.cs" />
+    <Compile Include="Models\UT\P_DRUG_MATCH.cs" />
+    <Compile Include="Models\UT\P_DRUG_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\P_DRUG_TYPE_VS_DesDICT.cs" />
+    <Compile Include="Models\UT\P_DRUG_TYPE_VS_DICT.cs" />
+    <Compile Include="Models\UT\P_DRUG_TYPE_VS_FIRDICT.cs" />
+    <Compile Include="Models\UT\P_DRUG_VS.cs" />
+    <Compile Include="Models\UT\P_EXAM_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\P_EXAM_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\P_LAB_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\P_LAB_RESULT_DICT.cs" />
+    <Compile Include="Models\UT\P_MR_NODE_DICT.cs" />
+    <Compile Include="Models\UT\P_MR_NODE_KEY_WORD.cs" />
+    <Compile Include="Models\UT\P_MR_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\P_OPERATION_DETAIL_DICT.cs" />
+    <Compile Include="Models\UT\P_OPERATION_DICT.cs" />
+    <Compile Include="Models\UT\P_ORDER_OTHER_DICT.cs" />
+    <Compile Include="Models\UT\P_ORDER_OTHER_VS.cs" />
+    <Compile Include="Models\UT\P_PAT_DRUG_RECORD.cs" />
+    <Compile Include="Models\UT\P_PAT_EXAM_MASTER.cs" />
+    <Compile Include="Models\UT\P_PAT_LAB_MASTER.cs" />
+    <Compile Include="Models\UT\P_PAT_LAB_RESULT.cs" />
+    <Compile Include="Models\UT\P_PAT_MR_KEY_RECORD.cs" />
+    <Compile Include="Models\UT\P_PAT_MR_NODE_RECORD.cs" />
+    <Compile Include="Models\UT\P_PAT_OPERATION.cs" />
+    <Compile Include="Models\UT\P_PAT_OPERATION_DETAIL.cs" />
+    <Compile Include="Models\UT\P_PAT_ORDER_OTHER.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_AUTO.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_DRUG.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_EXAM.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_LAB.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_MR_KEY.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_MR_REGULAR.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_MR_SOURCE.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_OPER.cs" />
+    <Compile Include="Models\UT\P_SD_ITEM_OTHER.cs" />
+    <Compile Include="Models\UT\SA_DICT.cs" />
+    <Compile Include="Models\UT\SA_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\SC_DICT.cs" />
+    <Compile Include="Models\UT\SC_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\SC_USER.cs" />
+    <Compile Include="Models\UT\SD_DICT.cs" />
+    <Compile Include="Models\UT\SD_EMR_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\SD_EMR_TYPE_VS_CDR.cs" />
+    <Compile Include="Models\UT\SD_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\SD_ITEM_RESULT_DICT.cs" />
+    <Compile Include="Models\UT\SD_ITEM_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\SD_NAME.cs" />
+    <Compile Include="Models\UT\SD_PAT_INFO_TYPE_DICT.cs" />
+    <Compile Include="Models\UT\SF_DICT.cs" />
+    <Compile Include="Models\UT\SF_TASK_DICT.cs" />
+    <Compile Include="Models\UT\SF_TASK_ITEM_DETAIL.cs" />
+    <Compile Include="Models\UT\SF_TASK_ITEM_DICT.cs" />
+    <Compile Include="Models\UT\SF_USER.cs" />
+    <Compile Include="Models\UT\SynchroRecord.cs" />
+    <Compile Include="Models\UT\SYNCHRO_ERROR_LOG.cs" />
+    <Compile Include="Models\UT\TEXT1.cs" />
+    <Compile Include="Models\UT\T_ITME_RESULT_LOCK.cs" />
+    <Compile Include="Models\UT\USERS.cs" />
+    <Compile Include="Models\UT\USERS_NULL.cs" />
+    <Compile Include="Models\UT\USER_ROLE_DICT.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Checkrecord.cs" />
+    <Compile Include="ViewModel\CheckRecordViewModel.cs" />
+    <Compile Include="ViewModel\EmrRecord_Cut.cs" />
+    <Compile Include="ViewModel\V_TEST_GERM.cs" />
+    <Compile Include="ViewModel\V_TEST_RECORD.cs" />
+    <EmbeddedResource Include="MainAPP.resx">
+      <DependentUpon>MainAPP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonHelper\CommonHelper.csproj">
+      <Project>{a9d030ec-c253-42dd-a47b-d0236e3e4e9d}</Project>
+      <Name>CommonHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HJ.Common\HJ.Common.csproj">
+      <Project>{d00e4d39-a685-4ac6-ba15-625c7f45969d}</Project>
+      <Name>HJ.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlSugar\SqlSugar.csproj">
+      <Project>{489bb790-226c-4fad-8d1e-51d72a7ff8e5}</Project>
+      <Name>SqlSugar</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

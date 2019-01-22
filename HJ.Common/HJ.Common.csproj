@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D00E4D39-A685-4AC6-BA15-625C7F45969D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HJ.Common</RootNamespace>
+    <AssemblyName>HJ.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IronPython">
+      <HintPath>..\..\..\..\02.引用文件\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\..\..\..\02.引用文件\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\..\..\..\02.引用文件\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\SqlSugar\References\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TestingCenterSystem.Common">
+      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="TestingCenterSystem.Models">
+      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TestingCenterSystem.ViewModels">
+      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.ViewModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Asert\Assert.cs" />
+    <Compile Include="Datas\Operate\MSSQL.cs" />
+    <Compile Include="Datas\Oracle\OracleMSSQL.cs" />
+    <Compile Include="Echos\DLL.cs" />
+    <Compile Include="Funcs\AndExpression.cs" />
+    <Compile Include="Funcs\ChainAnalyzer.cs" />
+    <Compile Include="Funcs\ExtensionMethod.cs" />
+    <Compile Include="Funcs\Expression.cs" />
+    <Compile Include="Funcs\Unit.cs" />
+    <Compile Include="Funcs\IExpression.cs" />
+    <Compile Include="Funcs\IndexMethod.cs" />
+    <Compile Include="Funcs\IRegexMethod.cs" />
+    <Compile Include="Funcs\ISubStrLogic.cs" />
+    <Compile Include="Funcs\LogicTemplate.cs" />
+    <Compile Include="Funcs\OperateInfo.cs" />
+    <Compile Include="Funcs\OrExpression.cs" />
+    <Compile Include="Funcs\RegexMethod.cs" />
+    <Compile Include="Funcs\UnitFuns.cs" />
+    <Compile Include="Funcs\ImplFunc.cs" />
+    <Compile Include="Log\ExceptionMessage.cs" />
+    <Compile Include="Log\ExecuteLog.cs" />
+    <Compile Include="Log\IniProvider.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trans\TransType.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
