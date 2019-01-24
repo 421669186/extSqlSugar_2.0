@@ -11,6 +11,7 @@ namespace ExtApp
     {
         DataTable GetDataTable();
         List<DataTable> GetDataTableList();
-        bool InsertDataToDb(DataTable dt,string strHospitalCode);
+        Tuple<bool, string> InsertDataToDb(DataTable dt, string strHospitalCode, string strDiseaseCode);
+        List<DataTable> GetInitData();
     }
 }

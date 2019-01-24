@@ -14,60 +14,113 @@ using HJ.Common;
 using HJSSD.EtlCommon;
 using HJ.Common.Trans;
 using ETL_EXAM.EtlExamDataItemLogic;
+using System.Threading.Tasks;
+using HJ.Common.Datas.Operate;
 
 namespace ExtApp.BusinessLogic
 {
     public partial class ExtLogic : DataBase, IImplement
     {
 
-        public DataTable GetData()
+        /// <summary>
+        /// TODO: 获取下拉框绑定的初始数据
+        /// </summary>
+        /// <returns></returns>
+        public List<DataTable> InitDataLoad()
         {
-            DataTable dt = CreateDataTable("PATIENT_NO,PATIENT_ID,EMR_TYPE_CODE,EMR_TYPE_NAME,REC_CONTENT,REC_DATE,cut,split,num");
-
-            //var patientinfo = db.Queryable<DP_IN_PATIENT>().ToList();
-            var emrRecords =
-                db.Ado.SqlQuery<DP_EMR_RECORD>(
-                        //@" SELECT b.* FROM dbo.DP_IN_PATIENT a,dbo.DP_EMR_RECORD b WHERE a.PATIENT_NO=b.PATIENT_NO AND a.OUT_DEPT_NAME LIKE '%脑%' AND (b.EMR_TYPE_NAME LIKE '%出院%' OR b.EMR_TYPE_NAME LIKE '%死亡%')"
-                        @" SELECT TOP 100000 PATIENT_NO FROM dbo.DP_EMR_RECORD"
-                        )
-                    .ToList();
-            //基本信息表OUT_DEPT_NAME含“脑”的患者， EMR中，EMR_TYPE_NAME含“出院|死亡”的，REC_CONTENT中找到“出院诊断：|死亡诊断：|最后诊断：|出院诊断:|死亡诊断:|最后诊断:”向后截取至“入院|手术|出院”（不含后置截取词的，向后截取之字段结尾），记为【出院诊断】；
-            //【出院诊断】中，①有“数字，| 数字.| 数字、| 数字,”的，以“数字，| 数字.| 数字、| 数字,”做诊断截取，②不含“数字，| 数字.| 数字、| 数字,”的，直接输出字段内容。
-
-            foreach (var emr in emrRecords)
+            List<DataTable> lstDt = new List<DataTable>();
+            DataTable dt = CreateDataTable("ITEM_CODE,ITEM_NAME");
+            var dictCode = db.Ado.SqlQuery<COM_DICT_DETAIL>(@"SELECT ITEM_CODE,ITEM_NAME FROM dbo.COM_DICT_DETAIL WHERE CLASS_CODE='HOSPITAL_CODE'").ToList();
+            foreach (var item in dictCode)
             {
-                //var content = emr.REC_CONTENT.ToStringOrEmpty();
-                // var cut = content.CoreWord("出院诊断：|死亡诊断：|最后诊断：|出院诊断:|死亡诊断:|最后诊断:").after.keyWord("入院|手术|出院").toLast.endStr;
-
-                //  var lsSplit = Regex.Split(cut, @"\d+[，\.、,]").ToList();
                 DataRow dr = dt.NewRow();
-                dr["PATIENT_NO"] = emr.PATIENT_NO.ToStringOrEmpty();
+                dr["ITEM_CODE"] = item.ITEM_CODE.ToStringOrEmpty();
+                dr["ITEM_NAME"] = item.ITEM_NAME.ToStringOrEmpty();
                 dt.Rows.Add(dr);
-                int i = 0;
-                //  foreach (var str in lsSplit)
-                //  {
-                //   if (i==0)
-                //   {
-                //    i = i + 1;
-                //    continue;
-                //   }
-                //DataRow dr = dt.NewRow();
-                //dr["PATIENT_NO"] = emr.PATIENT_NO.ToStringOrEmpty();
-                //dr["PATIENT_ID"] = emr.PATIENT_ID.ToStringOrEmpty();
-                //dr["EMR_TYPE_CODE"] = emr.EMR_TYPE_CODE.ToStringOrEmpty();
-                //dr["EMR_TYPE_NAME"] = emr.EMR_TYPE_NAME.ToStringOrEmpty();
-                //dr["REC_CONTENT"] = emr.REC_CONTENT.ToStringOrEmpty();
-                //dr["REC_DATE"] = emr.REC_DATE.ToDate();
-                //dr["cut"] = cut;
-                //dr["split"] = str;
-                //dr["num"] = i;
-                //dt.Rows.Add(dr);
-                //   i = i + 1;
-                //  }
             }
-            return dt;
+            lstDt.Add(dt);
+
+            DataTable dt2 = CreateDataTable("ITEM_CODE,ITEM_NAME");
+            var dictDiseaCode = db.Ado.SqlQuery<COM_DICT_DETAIL>(@"SELECT ITEM_CODE,ITEM_NAME FROM dbo.COM_DICT_DETAIL WHERE CLASS_CODE='DISEASE_CODE'").ToList();
+            foreach (var item in dictDiseaCode)
+            {
+                DataRow dr = dt2.NewRow();
+                dr["ITEM_CODE"] = item.ITEM_CODE.ToStringOrEmpty();
+                dr["ITEM_NAME"] = item.ITEM_NAME.ToStringOrEmpty();
+                dt2.Rows.Add(dr);
+            }
+            lstDt.Add(dt2);
+
+            return lstDt;
         }
 
-        
+        public Tuple<bool, string> ExcelDataToDB(DataTable dt, string strHosCode, string strDiseaseCode)
+        {
+            try
+            {
+                bool blFlag = true;
+                string strMsg = string.Empty;
+                if (dt.Rows.Count > 0)
+                {
+                    string strTableName = "STA_SITEM_RESULT_TEMP_" + strHosCode;
+
+                    //TODO:判断下拉框与导入EXCEL病种和医院编码是否一致
+                    var row = (from r in dt.Rows.Cast<DataRow>() select r).FirstOrDefault();
+                    string strExcelCode = row.Field<string>("HOSPITAL_CODE");
+                    string strExcelDiseCode = row.Field<string>("DISEASE_CODE");
+                    if (string.Equals(strExcelCode, strHosCode) || string.Equals(strDiseaseCode, strExcelDiseCode))
+                    {
+
+                        DataView dv = dt.DefaultView;
+                        DataTable disDt = dv.ToTable(true, "SD_ITEM_CODE");
+                        string strItemCode = string.Empty;
+                        for (int i = 0; i < disDt.Rows.Count; i++)
+                        {
+                            strItemCode += "'" + disDt.Rows[i][0].ToString() + "',";
+                        }
+                        strItemCode = strItemCode.Substring(0, strItemCode.Length - 1);
+
+                        string selSql = "SELECT 1 FROM DBO." + strTableName + " WHERE HOSPITAL_CODE='"+ strExcelCode + "' AND DISEASE_CODE='" + strDiseaseCode + "' AND SD_ITEM_CODE IN (" + strItemCode + ")";
+                        int existFl = db.Ado.GetInt(selSql);
+                        if (existFl > 0)
+                        {
+                            string delSql = "DELETE FROM DBO." + strTableName + " WHERE DISEASE_CODE='" + strDiseaseCode + "' AND SD_ITEM_CODE IN (" + strItemCode + ")";
+
+                            int bl = db.Ado.ExecuteCommand(delSql);
+                            if (bl <= 0)
+                            {
+                                blFlag = false;
+                                strMsg = "执行失败!";
+                            }
+                            else
+                            {
+                                //TODO:执行插入操作
+                                MSSQL mssql = new MSSQL(db.CurrentConnectionConfig.ConnectionString);
+                                mssql.BatchExecuteCommand(strTableName, dt);
+                            }
+                        }
+                        else
+                        {
+                            //TODO:执行插入操作
+                            MSSQL mssql = new MSSQL(db.CurrentConnectionConfig.ConnectionString);
+                            mssql.BatchExecuteCommand(strTableName, dt);
+                        }
+
+                    }
+                    else
+                    {
+                        blFlag = false;
+                        strMsg = "所选医院编码和疾病编码与导入EXCEL不一致!";
+                    }
+                }
+
+                return new Tuple<bool, string>(blFlag, strMsg);
+            }
+            catch (Exception ex)
+            {
+
+                return new Tuple<bool, string>(false, ex.Message);
+            }
+        }
     }
 }

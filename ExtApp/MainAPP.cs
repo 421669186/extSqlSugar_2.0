@@ -11,6 +11,7 @@ using SqlSugar;
 using CommonHelper;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Diagnostics;
 
 namespace ExtApp
 {
@@ -61,10 +62,31 @@ namespace ExtApp
         {
             this.txtMessage.AppendText(">>>程序运行信息... \n");
             string filePath = ReadFilePath();
-            DataTable dt = ReadExcel(filePath, "Sheet1");
-            string strHosName = this.comboBox1.Text;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
 
-            Implement.InsertDataToDb(dt,"GZFE");   
+            DataTable dt = ReadExcel(filePath, "导入模板");
+            if (dt != null)
+            {
+                string strHosName = this.comboBox1.SelectedValue.ToString().Trim();
+                //string strHosName = "TEST";
+                string strDisease = this.comboBox2.SelectedValue.ToString().Trim();
+
+                Tuple<bool, string> tupleMsg = Implement.InsertDataToDb(dt, strHosName, strDisease);
+                sw.Stop();
+                if (tupleMsg.Item1 == true)
+                {
+                    this.txtMessage.AppendText(">>>导入成功，执行用时：" + sw.Elapsed.Seconds + "s!\n");
+                }
+                else
+                {
+                    this.txtMessage.AppendText(">>>导入失败，异常信息：" + tupleMsg.Item2 + "\n");
+                }
+            }
+            else
+            {
+                this.txtMessage.AppendText(">>>数据读取异常！！！\n");
+            }
         }
 
         /// <summary>
@@ -76,9 +98,23 @@ namespace ExtApp
         {
             TestClass tc = new TestClass();
             tc.Run();
-        } 
+        }
+
+        /// <summary>
+        /// 直接运行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.txtMessage.AppendText(">>>程序运行信息... \n");
+            //   string filePath = "C:\\Users\\Administrator\\Desktop\\清远\\结果\\" + DateTime.Now.ToString("MM月dd日HH时mm分ss秒") + "-" + "导出.xlsx";
+            string filePath = "C:\\Users\\Administrator\\Desktop\\" + DateTime.Now.ToString("MM月dd日HH时mm分ss秒") + "-" + "导出.xlsx";
+            ExtExcel(Implement.GetDataTable(), filePath);
+        }
         #endregion
-        #region Excel 
+
+        #region  Excel Operation
         private string GetFilePath()
         {
             string localFilePath = "";
@@ -153,16 +189,18 @@ namespace ExtApp
             using (ExcelTool et = new ExcelTool(filePath))
             {
                 dt = et.ExcelToDataTable(sheet, true);
-
-                if (dt.Rows.Count > 0)
+                if (dt != null)
                 {
-                    this.txtMessage.AppendText("读取文件路径 >>" + filePath + " \n");
-                    //导出成功
-                    this.txtMessage.AppendText("读取完成！ \n");
-                }
-                else
-                {
-                    this.txtMessage.AppendText("导出失败！ \n");
+                    if (dt.Rows.Count > 0)
+                    {
+                        this.txtMessage.AppendText("读取文件路径 >>" + filePath + " \n");
+                        //导出成功
+                        this.txtMessage.AppendText("读取完成！ \n");
+                    }
+                    else
+                    {
+                        this.txtMessage.AppendText("导出失败！ \n");
+                    }
                 }
             }
 
@@ -170,17 +208,17 @@ namespace ExtApp
         }
         #endregion
 
-        /// <summary>
-        /// 直接运行
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button5_Click(object sender, EventArgs e)
+        private void MainAPP_Load(object sender, EventArgs e)
         {
-            this.txtMessage.AppendText(">>>程序运行信息... \n");
-            //   string filePath = "C:\\Users\\Administrator\\Desktop\\清远\\结果\\" + DateTime.Now.ToString("MM月dd日HH时mm分ss秒") + "-" + "导出.xlsx";
-            string filePath = "C:\\Users\\Administrator\\Desktop\\" + DateTime.Now.ToString("MM月dd日HH时mm分ss秒") + "-" + "导出.xlsx";
-            ExtExcel(Implement.GetDataTable(), filePath);
+            List<DataTable> dt = Implement.GetInitData();
+            this.comboBox1.DataSource = dt[0];
+            this.comboBox1.DisplayMember = "ITEM_NAME";
+            this.comboBox1.ValueMember = "ITEM_CODE";
+
+            this.comboBox2.DataSource = dt[1];
+            this.comboBox2.DisplayMember = "ITEM_NAME";
+            this.comboBox2.ValueMember = "ITEM_CODE";
+
         }
     }
 }

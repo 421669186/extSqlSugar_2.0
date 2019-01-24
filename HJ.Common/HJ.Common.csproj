@@ -54,15 +54,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TestingCenterSystem.Common">
-      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="TestingCenterSystem.Models">
-      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="TestingCenterSystem.ViewModels">
-      <HintPath>..\..\..\..\..\02.研发项目\07.深圳南山医院\07.项目引用\TestingCenterSystem.ViewModels.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asert\Assert.cs" />

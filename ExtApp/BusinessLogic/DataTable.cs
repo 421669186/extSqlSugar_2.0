@@ -37,10 +37,17 @@ namespace ExtApp.BusinessLogic
         #endregion
 
 
-        #region 插入需要导入的数据
-        public bool InsertDataToDb(DataTable dt, string hospitalCode)
+        #region 病种统计导入数据
+        public Tuple<bool, string> InsertDataToDb(DataTable dt, string hospitalCode,string strDiseaseCode)
         {
-            return true;
+            Tuple<bool,string> blflag = ExcelDataToDB(dt,hospitalCode,strDiseaseCode);
+            return blflag;
+        }
+
+        public List<DataTable> GetInitData()
+        {
+            List<DataTable> initDt = InitDataLoad();
+            return initDt;
         }
 
         #endregion
