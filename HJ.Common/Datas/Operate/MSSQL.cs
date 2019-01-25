@@ -197,6 +197,15 @@ namespace HJ.Common.Datas.Operate
                 {
                     sbc.ColumnMappings.Add(table.Columns[i].ColumnName, table.Columns[i].ColumnName);
                 }
+                //sbc.ColumnMappings.Add("医院编码", "HOSPITAL_CODE");
+                //sbc.ColumnMappings.Add("病种编码", "DISEASE_CODE");
+                //sbc.ColumnMappings.Add("数据项编码", "SD_ITEM_CODE");
+                //sbc.ColumnMappings.Add("PN", "PATIENT_NO");
+                //sbc.ColumnMappings.Add("值", "ITEM_VALUE");
+                //sbc.ColumnMappings.Add("医学负责人", "MEDICAL_NAME");
+                //sbc.ColumnMappings.Add("计算机负责人", "COMPUTER_NAME");
+                //sbc.ColumnMappings.Add("备注", "MEMO");
+
                 sbc.WriteToServer(table);
             }
         }

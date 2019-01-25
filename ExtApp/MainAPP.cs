@@ -65,11 +65,10 @@ namespace ExtApp
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            DataTable dt = ReadExcel(filePath, "导入模板");
+            DataTable dt = ReadExcel(filePath, "结果导入");
             if (dt != null)
             {
                 string strHosName = this.comboBox1.SelectedValue.ToString().Trim();
-                //string strHosName = "TEST";
                 string strDisease = this.comboBox2.SelectedValue.ToString().Trim();
 
                 Tuple<bool, string> tupleMsg = Implement.InsertDataToDb(dt, strHosName, strDisease);

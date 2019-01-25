@@ -3946,8 +3946,8 @@
 		<row><td>OrmTest.exe1_A00CB2F29D7F4C85AECE8BCB5761B100.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>OrmTest.exe_404203521AAB4644947F40B5C77329F7.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>SqliteTest.exe_C61D8F27DAB74B419978C2177558FCD7.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
-		<row><td>_Built1_08B22B4A56A34079ADDD3F8D91798E19.exe</td><td/><td>C:\Users\HuaJu201709A\Downloads\e_commerce_icon_128px_1170739_easyicon.net.ico</td><td>0</td></row>
-		<row><td>_Built_927C1D9160D64C91B90C646023456E74.exe</td><td/><td>C:\Users\HuaJu201709A\Downloads\e_commerce_icon_128px_1170739_easyicon.net.ico</td><td>0</td></row>
+		<row><td>_Built1_BD76776A55A841FE98A14B3606E80FFA.exe</td><td/><td>C:\Users\HuaJu201709A\Downloads\e_commerce_icon_128px_1170739_easyicon.net.ico</td><td>0</td></row>
+		<row><td>_Built_56A328C515DA47AB8F9A55F9FCE8595C.exe</td><td/><td>C:\Users\HuaJu201709A\Downloads\e_commerce_icon_128px_1170739_easyicon.net.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4452,7 +4452,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{A0FF3EBB-B74D-4C47-B91C-D4EAF07CAD85}</td><td/></row>
 		<row><td>ProductName</td><td>STA</td><td/></row>
-		<row><td>ProductVersion</td><td>1.01.0000</td><td/></row>
+		<row><td>ProductVersion</td><td>1.00.0000</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4614,8 +4614,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>sta1</td><td>##IDS_SHORTCUT_DISPLAY_NAME19##</td><td>ExtApp.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_927C1D9160D64C91B90C646023456E74.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME19##</td><td>ExtApp.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_08B22B4A56A34079ADDD3F8D91798E19.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>sta1</td><td>##IDS_SHORTCUT_DISPLAY_NAME19##</td><td>ExtApp.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_56A328C515DA47AB8F9A55F9FCE8595C.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME19##</td><td>ExtApp.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_BD76776A55A841FE98A14B3606E80FFA.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
