@@ -68,7 +68,7 @@ namespace ExtApp.BusinessLogic
                     var row = (from r in dt.Rows.Cast<DataRow>() select r).FirstOrDefault();
                     string strExcelCode = row.Field<string>("HOSPITAL_CODE");
                     string strExcelDiseCode = row.Field<string>("DISEASE_CODE");
-                    if (string.Equals(strExcelCode, strHosCode) || string.Equals(strDiseaseCode, strExcelDiseCode))
+                    if (string.Equals(strExcelCode, strHosCode) && string.Equals(strDiseaseCode, strExcelDiseCode))
                     {
 
                         DataView dv = dt.DefaultView;

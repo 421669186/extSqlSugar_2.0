@@ -10,16 +10,16 @@ using NPOI.XSSF.UserModel;
 
 namespace CommonHelper
 {
-    public class ExcelTool:IDisposable
+    public class ExcelTool : IDisposable
     {
         private string fileName = null; //文件名
         private IWorkbook workbook = null;
         private FileStream fs = null;
         private bool disposed;
 
-        public ExcelTool() 
+        public ExcelTool()
         {
- 
+
         }
         public ExcelTool(string fileName)
         {
@@ -27,15 +27,15 @@ namespace CommonHelper
             disposed = false;
         }
         #region 创建
-        public static void BuildExcel(string path,MemoryStream ms)
+        public static void BuildExcel(string path, MemoryStream ms)
         {
             HSSFWorkbook hssfworkbook = new HSSFWorkbook();
             // 新建一个Excel页签
             ISheet sheet1 = hssfworkbook.CreateSheet("Sheet1");
-            string destFileName = path; 
+            string destFileName = path;
             hssfworkbook.Write(ms);
 
-            System.IO.File.WriteAllBytes(destFileName, ms.ToArray()); 
+            System.IO.File.WriteAllBytes(destFileName, ms.ToArray());
 
         }
         #endregion
@@ -205,9 +205,9 @@ namespace CommonHelper
                         ++count;
                     }
 
-                    lsCount.Add("Sheet: "+data.TableName + " —> " + count);
+                    lsCount.Add("Sheet: " + data.TableName + " —> " + count);
                 }
-                
+
                 workbook.Write(fs); //写入到excel
                 return lsCount;
             }
@@ -280,7 +280,7 @@ namespace CommonHelper
                 Console.WriteLine("Exception: " + ex.Message);
                 return -1;
             }
-        } 
+        }
         #endregion
         #region 读取Excel
         /// <summary>
@@ -332,6 +332,7 @@ namespace CommonHelper
                                     DataColumn column = new DataColumn(cellValue);
                                     data.Columns.Add(column);
                                 }
+
                             }
                         }
                         startRow = sheet.FirstRowNum + 1;
@@ -352,7 +353,53 @@ namespace CommonHelper
                         for (int j = row.FirstCellNum; j < cellCount; ++j)
                         {
                             if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
-                                dataRow[j] = row.GetCell(j).ToString();
+                            {
+                                switch(row.GetCell(j).CellType)
+                                {
+                                    case CellType.Numeric:
+                                        if(DateUtil.IsCellDateFormatted(row.GetCell(j)))
+                                        {
+                                            dataRow[j] = row.GetCell(j).DateCellValue.ToString("yyyy-MM-dd hh:mm:ss");
+                                        }
+                                        else
+                                        {
+                                            dataRow[j] = row.GetCell(j).NumericCellValue;
+                                        }
+                                        break;
+                                    case CellType.Blank:
+                                        dataRow[j] = string.Empty;
+                                        break;
+                                    case CellType.Formula:
+                                        if (Path.GetExtension(fileName).ToLower().Trim()==".xlsx")
+                                        {
+                                            XSSFFormulaEvaluator eva = new XSSFFormulaEvaluator(workbook);
+                                            if (eva.Evaluate(row.GetCell(j)).CellType == CellType.Numeric && DateUtil.IsCellDateFormatted(row.GetCell(j)))
+                                            {
+                                                dataRow[j] = row.GetCell(j).DateCellValue.ToString("yyyy-MM-dd hh:mm:ss");
+                                            }
+                                            else
+                                            {
+                                                dataRow[j] = eva.Evaluate(row.GetCell(j)).StringValue;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            HSSFFormulaEvaluator eva = new HSSFFormulaEvaluator(workbook);
+                                            if (eva.Evaluate(row.GetCell(j)).CellType == CellType.Numeric && DateUtil.IsCellDateFormatted(row.GetCell(j)))
+                                            {
+                                                dataRow[j] = row.GetCell(j).DateCellValue.ToString("yyyy-MM-dd hh:mm:ss");
+                                            }
+                                            else
+                                            {
+                                                dataRow[j] = eva.Evaluate(row.GetCell(j)).StringValue;
+                                            }
+                                        }
+                                        break;
+                                    default:
+                                        dataRow[j] = row.GetCell(j).StringCellValue;
+                                        break;
+                                }
+                            }
                         }
                         data.Rows.Add(dataRow);
                     }
@@ -366,6 +413,7 @@ namespace CommonHelper
                 return null;
             }
         }
+
 
         public void Dispose()
         {

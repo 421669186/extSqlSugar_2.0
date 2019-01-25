@@ -12,7 +12,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>E:\work\病种统计\ExtSqlSugar_2.0\ExtSqlSugar_2.0\STA\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -72,6 +72,7 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\DLL\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -133,7 +134,6 @@
     <Compile Include="Models\CDR\KETTLE_CDR_LOG_JOB_STEP.cs" />
     <Compile Include="Models\CDR\sysdiagrams.cs" />
     <Compile Include="Models\STA\COM_DICT_DETAIL.cs" />
-    <Compile Include="Models\STA\STA_SITEM_RESULT_TEMP_SDSL.cs" />
     <Compile Include="Models\UT\COMM_DETAIL_DICT.cs" />
     <Compile Include="Models\UT\COMM_MASTER_DICT.cs" />
     <Compile Include="Models\UT\COMM_SDR_VS_CDR.cs" />

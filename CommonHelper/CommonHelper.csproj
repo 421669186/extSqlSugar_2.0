@@ -35,7 +35,7 @@
       <HintPath>..\DLL\EtlCommon.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\Tool\NPOI 2.2.0.0\dotnet4\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\DLL\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
